@@ -1,15 +1,16 @@
 # Vux
 
-Vux provides a clean interface and API for all kinds of Python web applications, including machine learning models inference and interactive apps based on Python.
+Welcome to Vux!
 
-```python
-import vux
+Vux helps you create beautiful Python-based web apps without additional configurations, and provides a clean API for developers.
+You can use Vux to create Markdown documentations or build a demo for your ML (machine-learning) models like [Gradio](https://gradio.app). (But seriously, we aren't that good enough.)
 
-with vux.page() as page:
-    page.add("# Hello, World!")
-    page.add(
+Key features:
+- Simple: quick starts need to be fast!
+- Async-ready: supported by Uvicorn
+- Flexible: very bendable
+- Fast: ⚡⚡
 
-    )
-
-vux.launch()
+```shell
+$ pip install vux
 ```
