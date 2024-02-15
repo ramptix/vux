@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{% title %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />
+    <link rel="stylesheet" href="/app.css" />
+</head>
+
+<body>
+    <div id="root">
+        {% root %}
+    </div>
+    <div id="vux-loader">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="vux-loader-svg">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M12 6l0 -3" />
+                <path d="M16.25 7.75l2.15 -2.15" />
+                <path d="M18 12l3 0" />
+                <path d="M16.25 16.25l2.15 2.15" />
+                <path d="M12 18l0 3" />
+                <path d="M7.75 16.25l-2.15 2.15" />
+                <path d="M6 12l-3 0" />
+                <path d="M7.75 7.75l-2.15 -2.15" />
+            </svg>
+            <span>Vux</span>
+        </div>
+    </div>
+    <script src="/index.js" type="module"></script>
+</body>
+
+</html>
