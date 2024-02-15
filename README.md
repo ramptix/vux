@@ -10,6 +10,7 @@ But seriously, we aren't that good enough.
 Key features:
 - Simple: quick starts need to be fast!
 - Async-ready: supported by [Uvicorn](https://uvicorn.org)
+- WebSocket: stay connected, my friend
 - Flexible: very bendable
 - Fast: ⚡⚡
 
@@ -25,6 +26,7 @@ To get started, try out our "Hello Vux" code below and learn from examples.
 import vux
 
 async def click(num: int):
+    num += 1
     return { "num": num }
 
 # create a home page
