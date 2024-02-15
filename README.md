@@ -27,6 +27,7 @@ import vux
 async def click(num: int):
     return { "num": num }
 
+# create a home page
 with vux.page() as page:
     page.add(
         "# Hello Vux",
@@ -36,6 +37,8 @@ with vux.page() as page:
             num=0
         )
     )
+
+vux.launch() # launch the app
 ```
 
 The Vux syntax is flexible, so there are many ways to write a single page. Pick the one that's most suitable for your projects and use it thoroughly so that you can maintain them more easily. (Be nice to your [coworkers](https://www.youtube.com/watch?v=6BMOk7zvKEE).)
