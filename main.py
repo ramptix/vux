@@ -2,7 +2,8 @@ import vux
 
 async def click(num: int):
     num += 1
-    return { "num": num }
+    raise KeyError("yo")
+    return "Oopsy daisy!"
 
 # create a home page
 with vux.page() as page:

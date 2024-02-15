@@ -1,3 +1,5 @@
+import { codeToHtml } from 'https://esm.sh/shiki@1.0.0'
+
 const loader = document.querySelector('#vux-loader div')
 
 const protocol = window.location.protocol == "http:" ? "ws://" : "wss://"
@@ -29,7 +31,7 @@ function newWebsocket(isReload = false) {
         if (event.reason == "server_runtime_error") {
             console.error("[vux] Error on server side (server_runtime_error)")
             window.clearInterval($heartbeat)
-            return alert("yo!")
+            return
         }
         console.error(`[vux] unexpected close. (${event.code}, reason: ${event.reason || null})`)
         console.warn(`[vux] reconnecting...`)
@@ -51,6 +53,9 @@ function newWebsocket(isReload = false) {
         }
         else if (data.t == "update") {
             runScripts(data)
+        }
+        else if (data.t == "error") {
+            serverSideError(data)
         }
     }
 }
@@ -124,4 +129,19 @@ function runScripts(data) {
     Function(generateSnippet(k) + v)()
     
     stateDefault($target)
+}
+
+async function serverSideError(data) {
+    const modal = document.querySelector('dialog#vux-dialog')
+    modal.showModal()
+
+    modal.querySelector("div").innerHTML = (
+        await codeToHtml(
+            'console.log(6969)',
+            {
+                lang: 'js',
+                theme: 'aurora-x'
+            }
+        )
+    )
 }
