@@ -1,10 +1,11 @@
 import os
+import traceback
 from typing import List, Optional
 
 import uvicorn
 
 from .cache import CACHE
-from .utils import STATIC, template
+from .utils import STATIC, format_exc, template
 from .websocket import WebSocket
 
 with open(os.path.join(STATIC, "index.html"), "rb") as f:
@@ -84,10 +85,14 @@ async def uvicorn_app(scope, receive, send):
             return
 
         except Exception as error:
+            exc = format_exc(traceback.format_exc())
+            summarization = exc.splitlines()[-1]
+
             await ws.send_json({
                 "t": "error",
                 "d": {
-                    "err": str(error)
+                    "err": exc,
+                    "sum": summarization
                 }
             })
             await ws.close()

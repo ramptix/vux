@@ -2,8 +2,9 @@ import vux
 
 async def click(num: int):
     num += 1
-    raise KeyError("yo")
-    return "Oopsy daisy!"
+    if num > 5:
+        raise ConnectionRefusedError("get out")
+    return { "num": num }
 
 # create a home page
 with vux.page() as page:

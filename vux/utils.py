@@ -3,6 +3,7 @@ import base64
 import hashlib
 import inspect
 import os
+import re
 from typing import Callable, Dict, List, Literal, Tuple
 
 from .types import Action, RawHeaders
@@ -104,3 +105,12 @@ def headers_to_dict(headers: RawHeaders) -> Dict[bytes, bytes]:
     return {
         k.lower(): v for k, v in headers
     }
+
+def format_exc(exc: str):
+    replacements = re.findall(r'(File ".+"), line \d+, in .*', exc)
+
+    for repl in replacements:
+        
+        exc = exc.replace(repl, repl.replace("\\", "\\\\"))
+    
+    return exc

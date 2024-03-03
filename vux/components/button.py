@@ -1,11 +1,15 @@
 import uuid
-from typing import Any, Callable, Dict, Union
+from typing import Any, Callable, Dict, TypedDict, Union
 
 from .base import Component, Flags, __loading__
 from ..types import Action
 from ..utils import clamp, create_repr, wrap_to_coro
 
-OnClickAction = Callable[..., Union[str, Dict[str, Any]]]
+
+class OnClickActionReturnType(TypedDict):
+    label: str
+
+OnClickAction = Callable[..., Union[OnClickActionReturnType, Dict[str, Any]]]
 
 class Button(Component):
     """Represents a button component.
@@ -67,7 +71,10 @@ class Button(Component):
                 raise TypeError(f"Unsupported type {type(event)} (return) for event handlers")
         
             if "$__dangerouslyExecuteJavascript" in res:
+                js = res['$__dangerouslyExecuteJavascript']
                 del res['$__dangerouslyExecuteJavascript']
+            else:
+                js = ""
 
             label = res.get('$label', self.label_template)
 
@@ -81,7 +88,8 @@ class Button(Component):
                     label = label.replace("$" + state, str(value))
 
             return (
-                f"""$target.textContent = {label!r};"""
+                f"""$target.textContent = {label!r};
+                {js}"""
             )
 
     def __repr__(self) -> str:

@@ -132,12 +132,15 @@ function runScripts(data) {
 }
 
 async function serverSideError(data) {
+    document.getElementById("root").innerHTML = "";
+
     const modal = document.querySelector('dialog#vux-dialog')
     modal.showModal()
 
     modal.querySelector("div").innerHTML = (
+        `<code>${data.d.sum}</code>` +
         await codeToHtml(
-            'console.log(6969)',
+            data.d.err,
             {
                 lang: 'js',
                 theme: 'aurora-x'
