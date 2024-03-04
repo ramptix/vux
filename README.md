@@ -15,15 +15,29 @@ $ pip install vux
 ```
 
 <sub>1. Tested.</sub><br />
-<sub>2. The Vux source code mostly uses low/medium API. For HTTP/WebSocket, Vux uses Uvicorn and not FastAPI because we want to keep the dependencies as clean as possible.</sub>
+<sub>2. The Vux source code mostly uses low/medium API. For HTTP/WebSocket, Vux uses Uvicorn and not FastAPI because we want to keep the dependencies as clean as possible.</sub><br />
 
-## Getting Started
+## Hello Vux.
 
-A minimal example with Markdown.
+A minimal example with Markdown and a simple form. Type hints compatible.
 
 ```python
 import vux
 
+async def hello_world(name: str, intensity: int = 1):
+  return "Hello " * intensity + name
+
 with vux.page() as page:
-  page.add("# Welcome!")
+  page.add("# Vux Form")
+  page.form(fn=hello_world)
+
+vux.launch()
+```
+
+## Vux One
+
+Vux One is a Vux branching project from Vux, designed specifically for browsers (clients). No server computation needed.
+
+```js
+import one from '@ramptix/vux1'
 ```
