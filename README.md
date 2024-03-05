@@ -14,7 +14,7 @@ Key features:
 $ pip install vux
 ```
 
-<sub>1. Tested.</sub><br />
+<sub>1. Yes.</sub><br />
 <sub>2. The Vux source code mostly uses low/medium API. For HTTP/WebSocket, Vux uses Uvicorn and not FastAPI because we want to keep the dependencies as clean as possible.</sub><br />
 
 ## Hello Vux.
@@ -33,6 +33,8 @@ with vux.page() as page:
 
 vux.launch()
 ```
+
+[More of Vux](https://google.com)
 
 ## Vux One
 
