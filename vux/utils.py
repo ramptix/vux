@@ -114,3 +114,18 @@ def format_exc(exc: str):
         exc = exc.replace(repl, repl.replace("\\", "\\\\"))
     
     return exc
+
+def is_notebook():
+    # https://stackoverflow.com/questions/15411967
+    try:
+        from IPython import get_ipython
+        if 'IPKernelApp' not in get_ipython().config:
+            return False
+        
+    except ImportError:
+        return False
+    
+    except AttributeError:
+        return False
+    
+    return True

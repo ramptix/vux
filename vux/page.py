@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from typing import Any, Iterable, List, Literal, Optional, Union
+from typing import Any, List, Literal, Optional, Union
 
 from .cache import CACHE
 from .components import Component, component_lookup
 from .components.base import Flags
-from .utils import clamp
+from .utils import clamp, is_notebook
 
 ContentType = Union[Literal["markdown"], Component]
 
@@ -29,9 +29,10 @@ class page:
 
     def __init__(self, id: str = "home"):
         if id in CACHE.pages:
-            raise NameError(
-                f"Page id {clamp(id)!r} is already in use."
-            )
+            if not is_notebook():
+                raise NameError(
+                    f"Page id {clamp(id)!r} is already in use."
+                )
 
         self.page_id = id
         self.components = []
