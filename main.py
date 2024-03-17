@@ -1,5 +1,6 @@
 import vux
 
+"""
 async def click(num: int):
     num += 1
     if num > 5:
@@ -16,5 +17,8 @@ with vux.page() as page:
             num=0
         )
     )
+"""
+
+vux.static("hey, man! <button>sugma dk</button>", plain=True)
 
 vux.launch(host="0.0.0.0") # launch the app

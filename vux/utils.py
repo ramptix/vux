@@ -92,20 +92,6 @@ def wrap_to_coro(fn: Action) -> Callable:
     
     return wrapper
 
-def get_websocket_accept_key(client_key: bytes) -> bytes:
-    magic = b"258EAFA5-E914-47DA-95CA-C5AB0DC85B11"
-
-    concat = client_key + magic
-    sha1_hash = hashlib.sha1(concat).digest()
-    key = base64.b64encode(sha1_hash)
-
-    return key
-
-def headers_to_dict(headers: RawHeaders) -> Dict[bytes, bytes]:
-    return {
-        k.lower(): v for k, v in headers
-    }
-
 def format_exc(exc: str):
     replacements = re.findall(r'(File ".+"), line \d+, in .*', exc)
 

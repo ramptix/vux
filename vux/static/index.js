@@ -98,9 +98,13 @@ function stateDefault($target) {
 function runStartupScripts(data) {
     Object.entries(data.d).forEach(([k, v]) => {
         const $target = document.querySelector(`[data-control="${k}"]`)
-        const { listens } = Function(
+        const result = Function(
             generateSnippet(k) + v
         )()
+        if (!result)
+            return
+
+        const { listens } = result;
 
         listens.forEach(type => {
             $target.addEventListener(type, (event) => {
@@ -124,10 +128,7 @@ function runScripts(data) {
     const v = data.d[k]
 
     const $target = document.querySelector(`[data-control="${k}"]`)
-
-    console.log(k, v)
     Function(generateSnippet(k) + v)()
-    
     stateDefault($target)
 }
 

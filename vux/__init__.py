@@ -21,10 +21,12 @@ For more information, visit https://github.com/ramptix/vux
 from .components import Button, Markdown
 from .launch import launch
 from .page import page
+from .static import static
 
 __all__ = [
     'Button',
     'Markdown',
     'launch',
     'page',
+    'static'
 ]
