@@ -1,3 +1,4 @@
+import gc
 import os
 import traceback
 from typing import List, Optional
@@ -57,9 +58,11 @@ async def uvicorn_app(scope, receive, send):
     elif scope['type'] == 'websocket':
         ws = WebSocket(scope, receive, send)
         await ws.accept()
+
+        page = CACHE.pages['home'].copy()
         await ws.send_json({
             "t": "startup",
-            "d": CACHE.pages['home'].__startup__
+            "d": page.__startup__
         })
 
         try:
@@ -69,7 +72,7 @@ async def uvicorn_app(scope, receive, send):
                 if payload['t'] == 'update':
                     # {"t": "update", "d": {"id": "...", "event": "click" }}
                     component_id = payload['d']['id']
-                    d = await CACHE.pages['home'].mapping[component_id].on_event(payload['d']['event'])
+                    d = await page.mapping[component_id].on_event(payload['d']['event'])
 
                     await ws.send_json({
                         "t": "update",
@@ -96,8 +99,11 @@ async def uvicorn_app(scope, receive, send):
                 }
             })
             await ws.close()
-            
             raise error # raise it again
+        
+        finally:
+            del page
+            gc.collect()
         
 
 def launch(*, host: Optional[str] = None, port: int = 5000, **kwargs):

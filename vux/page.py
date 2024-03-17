@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from copy import deepcopy
 from typing import Any, Iterable, List, Literal, Optional, Union
 
 from .cache import CACHE
@@ -25,7 +26,6 @@ class page:
     components: List[Component]
     page_title: Optional[str]
     page_id: str
-    page_title: Optional[str]
 
     def __init__(self, id: str = "home"):
         if id in CACHE.pages:
@@ -126,6 +126,9 @@ class page:
 
     def update(self):
         CACHE.pages[self.page_id] = self
+
+    def copy(self):
+        return deepcopy(self)
 
     @property
     def __html__(self) -> bytes:
